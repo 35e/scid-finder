@@ -69,6 +69,7 @@ GM_addStyle(`
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    z-index: 9999;
   }
 
   #scid-search:hover {
