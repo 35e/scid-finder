@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SCID Finder
 // @namespace    https://github.com/35e/scid-finder
-// @version      0.2
+// @version      0.3
 // @description  Search socialclub id associated with the name
 // @author       35e
 // @match        https://socialclub.rockstargames.com/*
@@ -25,6 +25,19 @@ async function searchUser() {
   if (userName === null) return
 
   let data = await sendRequest(`https://scapi.rockstargames.com/profile/getprofile?nickname=${userName.toLowerCase()}`)
+
+  if (data.error) {
+    switch (data.error.code) {
+      case "401":
+        return alert('Authentication token outdated, please refresh the page.')
+      case "5001.27":
+        return alert('Username is not valid.')
+      case "6000.41":
+        return alert('Username doesn\'t exist.')
+      default:
+        return alert('An error occured, please try again.')
+    }
+  }
 
   if (data.status !== true) {
     return alert('User not found')
