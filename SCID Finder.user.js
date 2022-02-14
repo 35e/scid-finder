@@ -39,10 +39,6 @@ async function searchUser() {
     }
   }
 
-  if (data.status !== true) {
-    return alert('User not found')
-  }
-
   navigator.clipboard.writeText(data.accounts[0].rockstarAccount.rockstarId)
   alert(`SCID copied to clipboard: ${data.accounts[0].rockstarAccount.rockstarId}`)
 }
